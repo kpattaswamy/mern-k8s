@@ -2,21 +2,25 @@ const express = require("express");
 require("dotenv").config()
 const cors = require("cors");
 
-const PORT = process.env.PORT;
-const CONN_STR = process.env.CONN_STR;
+const PORT = 8081;
+const CONN_STR = "mongodb://mongodb:27017";
 
 let DB_CONNECTED = false;
 
 const getMongoDB = async () => {
     const MongoClient = require('mongodb').MongoClient;
-    let logConnString = CONN_STR.replace(/\/(.*:.*)@/, "//----:----@");
+    let logConnString = "mongodb://localhost:27017";
+
     console.log(`Connecting to database using ${logConnString}`);
     let db;
     try {
       const client = await MongoClient.connect(CONN_STR, { useNewUrlParser: true, useUnifiedTopology: true });
       db = await client.db("mern-k8s");
-      DB_CONNECTED = true;  
+      DB_CONNECTED = true;
+      console.log("Connected to the database");
+
     } catch (e) {
+      console.log("Error connecting to the database");
       console.log(e.toString());
     }
     return db;

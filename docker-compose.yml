@@ -1,0 +1,29 @@
+version: "3.0"
+
+services:
+    front:
+        build:
+            context: .
+            dockerfile: Dockerfile.front
+        ports:
+            - 8080:8080
+        depends_on:
+            - back
+        image: front:latest
+
+    back:
+        build:
+            context: .
+            dockerfile: Dockerfile.back
+        ports:
+            - 8081:8081
+        depends_on:
+            - mongodb
+        image: back:latest
+
+    mongodb:
+        image: mongo:latest
+        container_name: mongodb
+        restart: always
+        ports:
+            - 27017:27017
