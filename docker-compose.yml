@@ -9,17 +9,27 @@ services:
             - 8080:8080
         depends_on:
             - back
-        image: front:latest
+        image: gcr.io/pixie-prod/demos/px-mongo/frontend:0.1.0
 
     back:
         build:
             context: .
             dockerfile: Dockerfile.back
         ports:
-            - 8081:8081
+            - 8085:8085
         depends_on:
             - mongodb
         image: back:latest
+        
+    load:
+        build:
+            context: .
+            dockerfile: Dockerfile.load
+        depends_on:
+            - back
+        links:
+            - back
+        image: load:latest
 
     mongodb:
         image: mongo:latest

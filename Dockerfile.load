@@ -1,0 +1,9 @@
+FROM python:3.6
+
+WORKDIR /opt/app
+
+RUN pip install locust
+
+COPY src/load-test/locustfile.py .
+
+CMD ["locust", "-f", "locustfile.py", "--headless", "-u", "100", "-r", "5", "--host", "http://back:8085"]

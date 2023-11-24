@@ -2,7 +2,7 @@ const express = require("express");
 require("dotenv").config()
 const cors = require("cors");
 
-const PORT = 8081;
+const PORT = 8085;
 const CONN_STR = "mongodb://mongodb:27017";
 
 let DB_CONNECTED = false;
