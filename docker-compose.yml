@@ -27,8 +27,6 @@ services:
             dockerfile: Dockerfile.load
         depends_on:
             - back
-        links:
-            - back
         image: load:latest
 
     mongodb:
