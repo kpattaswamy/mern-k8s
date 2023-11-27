@@ -24,7 +24,7 @@ spec:
         io.kompose.service: load
     spec:
       containers:
-      - image: load:latest
+      - image: gcr.io/pixie-prod/demos/px-mongo/load:0.1.0
         imagePullPolicy: ""
         name: load
         resources: {}

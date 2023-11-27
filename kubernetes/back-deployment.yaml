@@ -24,7 +24,7 @@ spec:
         io.kompose.service: back
     spec:
       containers:
-      - image: back:latest
+      - image: gcr.io/pixie-prod/demos/px-mongo/backend:0.2.0
         imagePullPolicy: ""
         name: back
         ports:
