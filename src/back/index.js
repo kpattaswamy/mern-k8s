@@ -9,7 +9,7 @@ let DB_CONNECTED = false;
 
 const getMongoDB = async () => {
     const MongoClient = require('mongodb').MongoClient;
-    let logConnString = "mongodb://localhost:27017";
+    let logConnString = "mongodb://mongodb:27017";
 
     console.log(`Connecting to database using ${logConnString}`);
     let db;
@@ -87,11 +87,10 @@ app.put("/update", async (req, res) => {
   try {
     let collection = await db.collection("entries");
     let filter = {};
-    result = await collection.findOneAndUpdate(
+    result = await collection.updateOne(
       filter,
       {$set: req.body},
-      {returnOriginal: false}
-    );    
+    );
   } catch(e) {
     log("/update", e.toString());
   }

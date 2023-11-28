@@ -31,11 +31,11 @@ class UserBehavior(TaskSet):
     def on_start(self):
        insert(self)
 
-    tasks = {insert: 3,
-        get: 2,
-        delete: 1,
-        update: 1}
+    tasks = {insert: 2,
+        get: 1,
+        update: 1,
+        delete: 1}
 
 class WebsiteUser(HttpUser):
     tasks = [UserBehavior]
-    wait_time = between(5, 10)
+    wait_time = between(7, 10)
