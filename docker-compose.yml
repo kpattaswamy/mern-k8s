@@ -19,15 +19,15 @@ services:
             - 8085:8085
         depends_on:
             - mongodb
-        image: gcr.io/pixie-prod/demos/px-mongo/backend:0.2.0
-        
+        image: back:latest
+
     load:
         build:
             context: .
             dockerfile: Dockerfile.load
         depends_on:
             - back
-        image: gcr.io/pixie-prod/demos/px-mongo/load:0.1.0
+        image: load:latest
 
     mongodb:
         image: mongo:latest
