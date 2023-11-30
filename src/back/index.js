@@ -76,5 +76,21 @@ app.get("/clear", async (req, res) => {
     }
     res.send(result).status(200);
 })
+
+app.put("/update", async (req, res) => {
+  log("/update", `PUT request ${JSON.stringify(req.body)}`);
+  let result;
+  try {
+    let collection = await db.collection("entries");
+    let filter = {};
+    result = await collection.updateOne(
+      filter,
+      {$set: req.body},
+    );
+  } catch(e) {
+    log("/update", e.toString());
+  }
+  res.send(result).status(200);
+})
   
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

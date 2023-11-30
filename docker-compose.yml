@@ -1,0 +1,40 @@
+version: "3.0"
+
+services:
+    front:
+        build:
+            context: ./src/front/
+            dockerfile: ../../dockerfiles/Dockerfile.front
+        ports:
+            - 8080:8080
+        depends_on:
+            - back
+        image: gcr.io/pixie-prod/demos/px-mongo/frontend:1.0.0
+
+    back:
+        build:
+            context: ./src/back
+            dockerfile: ../../dockerfiles/Dockerfile.back
+        ports:
+            - 8085:8085
+        depends_on:
+            - mongodb
+        environment:
+            - PORT=8085
+            - CONN_STR=mongodb://mongodb:27017
+        image: gcr.io/pixie-prod/demos/px-mongo/backend:1.0.0
+
+    load:
+        build:
+            context: ./src/load-test
+            dockerfile: ../../dockerfiles/Dockerfile.load
+        depends_on:
+            - back
+        image: gcr.io/pixie-prod/demos/px-mongo/load:1.0.0
+
+    mongodb:
+        image: mongo:7.0
+        container_name: mongodb
+        restart: always
+        ports:
+            - 27017:27017
