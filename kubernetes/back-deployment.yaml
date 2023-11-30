@@ -29,7 +29,7 @@ spec:
           value: mongodb://mongodb:27017
         - name: PORT
           value: "8085"
-        image: back:latest
+        image: gcr.io/pixie-prod/demos/px-mongo/backend:1.0.0
         imagePullPolicy: ""
         name: back
         ports:

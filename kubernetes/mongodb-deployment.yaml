@@ -24,7 +24,7 @@ spec:
         io.kompose.service: mongodb
     spec:
       containers:
-      - image: mongo:latest
+      - image: mongo:7.0
         imagePullPolicy: ""
         name: mongodb
         ports:
