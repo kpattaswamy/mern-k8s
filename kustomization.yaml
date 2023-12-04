@@ -1,0 +1,13 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: px-mongo
+resources:
+  - kubernetes/namespace.yaml
+  - kubernetes/back-deployment.yaml
+  - kubernetes/back-service.yaml
+  - kubernetes/front-deployment.yaml
+  - kubernetes/front-service.yaml
+  - kubernetes/load-deployment.yaml
+  - kubernetes/mongodb-deployment.yaml
+  - kubernetes/mongodb-service.yaml
