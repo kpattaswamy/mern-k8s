@@ -1,0 +1,11 @@
+---
+- op: add
+  path: /spec/template/spec/initContainers
+  value:
+    - name: mongodb-wait
+      image: mongo:7.0
+      command: ['sh', '-c', 'set -xe;
+        while ! mongosh mongodb://mongodb:27017 --eval "db.serverStatus()" ; do
+          echo "waiting until mongodb is available";
+          sleep 2;
+        done;']
