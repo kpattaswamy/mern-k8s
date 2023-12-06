@@ -95,7 +95,7 @@ spec:
       containers:
       - env:
         - name: CONN_STR
-          value: mongodb://mongodb.px-mongo:27017
+          value: mongodb://mongodb:27017
         - name: PORT
           value: "8085"
         image: gcr.io/pixie-prod/demos/px-mongo/backend:1.0.0
@@ -104,6 +104,14 @@ spec:
         ports:
         - containerPort: 8085
         resources: {}
+      initContainers:
+      - command:
+        - sh
+        - -c
+        - set -xe; while ! mongosh mongodb://mongodb:27017 --eval "db.serverStatus()"
+          ; do echo "waiting until mongodb is available"; sleep 2; done;
+        image: mongo:7.0
+        name: mongodb-wait
       restartPolicy: Always
       serviceAccountName: ""
       volumes: null
